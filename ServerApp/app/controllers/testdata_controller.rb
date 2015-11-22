@@ -7,7 +7,9 @@ class TestdataController < ApplicationController
   # GET /testdata
   # GET /testdata.json
   def index
-    @testdata = Testdatum.all
+    #@testdata = Testdatum.all
+    @testdata = Testdatum.last(3).reverse
+    @recenttestdata = Testdatum.last
   end
 
   # GET /testdata/1

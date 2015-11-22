@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ServerApp</title>
+  <title>Lake Monitoring System</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<div class="col-md-12 banner">
+		<h1>Lake Monitoring System</h1>
+	</div>
+	<div class="container-fluid">
+	    <!--Sidebar content-->
+	    <div class="col-md-2 sidebar">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Previous Data</a></li>
+				<li><a href="#">Sensor Information</a></li>
+				<li><a href="#">Contact Admin</a></li>
+				<li><a href="#">Admin Login</a></li>
+			</ul>
+	    </div>
+	    <!--Body content-->
+	    <div class="col-md-10 content-section">
+			<%= yield %>
+	    </div>
+	</div>
 </body>
 </html>
