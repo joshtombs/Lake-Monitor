@@ -18,7 +18,6 @@ class SensordataController < ApplicationController
     Sensordata.order(time_recorded: :desc).all.each do |data|
       @dates << Date::MONTHNAMES[Integer(data.time_recorded.strftime("%m"))] + data.time_recorded.strftime(" %Y")
     end
-
     @dates = @dates.uniq
   end
 
@@ -27,10 +26,8 @@ class SensordataController < ApplicationController
     @month_name = params[:month]
     @month = Date::MONTHNAMES.index(@month_name)
     @year = Integer(params[:year])
-    puts @month.to_s + " " + @year.to_s
 
     @records = Sensordata.where("MONTH(time_recorded) = ? and YEAR(time_recorded) = ?", @month, @year).order(time_recorded: :desc)
-    #Sensordata.where("time_recorded >= :start_date AND time_recorded <= :end_date")
   end
 
   #Get /show_previous/1
