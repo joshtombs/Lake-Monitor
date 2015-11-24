@@ -1,5 +1,5 @@
 class SensordataController < ApplicationController
-  before_action :set_sensordata, only: [:show, :edit, :update, :destroy]
+  before_action :set_sensordata, only: [:show, :edit, :update, :destroy, :show_previous]
   
   protect_from_forgery
   skip_before_action :verify_authenticity_token, if: :json_request?
@@ -22,15 +22,20 @@ class SensordataController < ApplicationController
     @dates = @dates.uniq
   end
 
-  #GET /previous_data/
+  #GET /previous_data/November/2015
   def previous_range
     @month_name = params[:month]
     @month = Date::MONTHNAMES.index(@month_name)
     @year = Integer(params[:year])
     puts @month.to_s + " " + @year.to_s
 
-    @records = Sensordata.where("MONTH(time_recorded) = ? and YEAR(time_recorded) = ?", @month, @year)
+    @records = Sensordata.where("MONTH(time_recorded) = ? and YEAR(time_recorded) = ?", @month, @year).order(time_recorded: :desc)
     #Sensordata.where("time_recorded >= :start_date AND time_recorded <= :end_date")
+  end
+
+  #Get /show_previous/1
+  def show_previous
+    @previous_link = "/previous_data/" + Date::MONTHNAMES[Integer(@sensordata.time_recorded.strftime("%m"))] + "/" + @sensordata.time_recorded.strftime(" %Y")
   end
 
   # GET /sensordata/1

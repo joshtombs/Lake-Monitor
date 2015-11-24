@@ -5,9 +5,12 @@
   <table class="table">
       <% @records.each do |record| %>
         <tr>
-          <td><%= record.time_recorded %></td>
-          <td><%= link_to 'Show', record %></td>
+          <td><a href="/show_previous/<%=record.id%>"><%= record.time_recorded %></a></td>
         </tr>
       <% end %>
   </table>
+</p>
+
+<p>
+	<a href="/previous_data">Back</a>
 </p>
