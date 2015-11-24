@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'show_previous/:id' => 'sensordata#show_previous'
 
   get 'contacts' => 'contactinfo#index'
-  
+  get 'contact_admin' => 'contactinfo#contact_admin'
+
   root :to => 'sensordata#index'
   match "*path", to: "sensordata#index", via: :all
 end
