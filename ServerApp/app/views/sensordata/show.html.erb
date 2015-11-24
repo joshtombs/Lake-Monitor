@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Time Recorded:</strong>
+  <%= @sensordata.time_recorded %>
+</p>
+
+<p>
+  <strong>Wind Speed:</strong>
+  <%= @sensordata.wind_speed %>
+</p>
+
+<p>
+  <strong>Wind Direction:</strong>
+  <%= @sensordata.wind_direction %>
+</p>
+
+<p>
+  <strong>Rainfall:</strong>
+  <%= @sensordata.rainfall %>
+</p>
+
+<p>
+  <strong>Water Level:</strong>
+  <%= @sensordata.water_level %>
+</p>
+
+<p>
+  <strong>Water Temp:</strong>
+  <%= @sensordata.water_temp %>
+</p>
+
+<p>
+  <strong>Ambient Temp:</strong>
+  <%= @sensordata.ambient_temp %>
+</p>
+
+<p>
+  <strong>Humidity:</strong>
+  <%= @sensordata.humidity %>
+</p>
+
+<p>
+  <strong>Flow Rate:</strong>
+  <%= @sensordata.flow_rate %>
+</p>
+
+<%= link_to 'Edit', edit_sensordatum_path(@sensordata) %> |
+<%= link_to 'Back', sensordata_path %>

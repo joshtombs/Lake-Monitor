@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022232543) do
+ActiveRecord::Schema.define(version: 0) do
 
-  create_table "testdata", force: :cascade do |t|
-    t.string   "field1",     limit: 255
-    t.integer  "field2",     limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  create_table "t_Contact_Info", id: false, force: :cascade do |t|
+    t.string "first_name",   limit: 30, default: "", null: false
+    t.string "last_name",    limit: 30, default: "", null: false
+    t.string "phone_number", limit: 11
+    t.string "email",        limit: 40
+  end
+
+  create_table "t_Sensor_Data", primary_key: "time_recorded", force: :cascade do |t|
+    t.float   "wind_speed",     limit: 24
+    t.integer "wind_direction", limit: 4
+    t.float   "rainfall",       limit: 24
+    t.float   "water_level",    limit: 24
+    t.float   "water_temp",     limit: 24
+    t.float   "ambient_temp",   limit: 24
+    t.integer "humidity",       limit: 4
+    t.float   "flow_rate",      limit: 24
   end
 
 end

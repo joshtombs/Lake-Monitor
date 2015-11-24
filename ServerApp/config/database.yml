@@ -18,7 +18,7 @@ default: &default
 
 development:
   <<: *default
-  database: testApp_development
+  database: LMS
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

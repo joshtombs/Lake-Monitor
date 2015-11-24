@@ -1,0 +1,80 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Most Recent Post:</h1>
+<p>
+  <table class="table">
+    <tr>
+      <td>Time Recorded: </td>
+      <td><%=@recentsensordata.time_recorded%></td>
+    </tr>
+    <tr>
+      <td>Wind Speed:</td>
+      <td><%=@recentsensordata.wind_speed%></td>
+    </tr>
+    <tr>
+      <td>Wind Direction: </td>
+      <td><%=@recentsensordata.wind_direction%></td>
+    </tr>
+    <tr>
+      <td>Rainfall:</td>
+      <td><%=@recentsensordata.rainfall%></td>
+    </tr>
+    <tr>
+      <td>Water Level: </td>
+      <td><%=@recentsensordata.water_level%></td>
+    </tr>
+    <tr>
+      <td>Water Temp: </td>
+      <td><%=@recentsensordata.water_temp%></td>
+    </tr>
+    <tr> 
+      <td>Ambient Temp: </td>
+      <td><%=@recentsensordata.ambient_temp%></td>
+    </tr>
+    <tr>
+      <td>Humidity: </td>
+      <td><%=@recentsensordata.humidity%></td>
+    </tr>
+    <tr>
+      <td>Flow Rate:</td>
+      <td><%=@recentsensordata.flow_rate%></td>
+    </tr>
+  </table>
+</p>
+
+<h1>Listing Last 3 Sensor Data</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Time Recorded</th>
+      <th>Wind Speed</th>
+      <th>Wind Direction</th>
+      <th>Rainfall</th>
+      <th>Water Level</th>
+      <th>Water Temp</th>
+      <th>Ambient Temp</th>
+      <th>Humidity</th>
+      <th>Flow Rate</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sensordata.each do |data| %>
+      <tr>
+        <td><%= data.time_recorded %></td>
+        <td><%= data.wind_speed %></td>
+        <td><%= data.wind_direction %></td>
+        <td><%= data.rainfall %></td>
+        <td><%= data.water_level %></td>
+        <td><%= data.water_temp %></td>
+        <td><%= data.ambient_temp %></td>
+        <td><%= data.humidity %></td>
+        <td><%= data.flow_rate %></td>
+        <td><%= link_to 'Show', data %></td>
+        <td><%= link_to 'Destroy', data, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

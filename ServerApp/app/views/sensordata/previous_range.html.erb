@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Data For <%= @month_name + " " + @year.to_s%>:</h1>
+<p>
+  <table class="table">
+      <% @records.each do |record| %>
+        <tr>
+          <td><%= record.time_recorded %></td>
+          <td><%= link_to 'Show', record %></td>
+        </tr>
+      <% end %>
+  </table>
+</p>

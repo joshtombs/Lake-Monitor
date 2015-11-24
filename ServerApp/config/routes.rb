@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :testdata  
+  resources :sensordata  
+
+  get 'previous_data' => 'sensordata#previous'
+  get 'previous_data/:month/:year' => 'sensordata#previous_range'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
