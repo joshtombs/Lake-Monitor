@@ -1,48 +1,44 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Time Recorded:</strong>
-  <%= @sensordata.time_recorded %>
-</p>
-
-<p>
-  <strong>Wind Speed:</strong>
-  <%= @sensordata.wind_speed %>
-</p>
-
-<p>
-  <strong>Wind Direction:</strong>
-  <%= @sensordata.wind_direction %>
-</p>
-
-<p>
-  <strong>Rainfall:</strong>
-  <%= @sensordata.rainfall %>
-</p>
-
-<p>
-  <strong>Water Level:</strong>
-  <%= @sensordata.water_level %>
-</p>
-
-<p>
-  <strong>Water Temp:</strong>
-  <%= @sensordata.water_temp %>
-</p>
-
-<p>
-  <strong>Ambient Temp:</strong>
-  <%= @sensordata.ambient_temp %>
-</p>
-
-<p>
-  <strong>Humidity:</strong>
-  <%= @sensordata.humidity %>
-</p>
-
-<p>
-  <strong>Flow Rate:</strong>
-  <%= @sensordata.flow_rate %>
+  <table class="table">
+    <tr>
+      <td>Time Recorded: </td>
+      <td><%=@sensordata.time_recorded%></td>
+    </tr>
+    <tr>
+      <td>Wind Speed:</td>
+      <td><%=@sensordata.wind_speed%></td>
+    </tr>
+    <tr>
+      <td>Wind Direction: </td>
+      <td><%=@sensordata.wind_direction%></td>
+    </tr>
+    <tr>
+      <td>Rainfall:</td>
+      <td><%=@sensordata.rainfall%></td>
+    </tr>
+    <tr>
+      <td>Water Level: </td>
+      <td><%=@sensordata.water_level%></td>
+    </tr>
+    <tr>
+      <td>Water Temp: </td>
+      <td><%=@sensordata.water_temp%></td>
+    </tr>
+    <tr> 
+      <td>Ambient Temp: </td>
+      <td><%=@sensordata.ambient_temp%></td>
+    </tr>
+    <tr>
+      <td>Humidity: </td>
+      <td><%=@sensordata.humidity%></td>
+    </tr>
+    <tr>
+      <td>Flow Rate:</td>
+      <td><%=@sensordata.flow_rate%></td>
+    </tr>
+  </table>
 </p>
 
 <%= link_to 'Back', sensordata_path %>
