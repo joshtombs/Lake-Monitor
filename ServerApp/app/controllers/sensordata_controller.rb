@@ -7,8 +7,15 @@ class SensordataController < ApplicationController
   # GET /sensordata
   # GET /sensordata.json
   def index
-    @sensordata = Sensordata.order(time_recorded: :desc).first(3)
-    @recentsensordata = Sensordata.order(time_recorded: :desc).first
+    @sensordata = Sensordata.order(time_recorded: :desc).first(10)
+    @recent_wind_speed = Sensordata.where("sensor_id = ?", "1").order(time_recorded: :desc).first
+    @recent_wind_direction = Sensordata.where("sensor_id = ?", "2").order(time_recorded: :desc).first
+    @recent_rainfall = Sensordata.where("sensor_id = ?", "3").order(time_recorded: :desc).first
+    @recent_water_level = Sensordata.where("sensor_id = ?", "4").order(time_recorded: :desc).first
+    @recent_water_temp = Sensordata.where("sensor_id = ?", "5").order(time_recorded: :desc).first
+    @recent_ambient_temp = Sensordata.where("sensor_id = ?", "6").order(time_recorded: :desc).first
+    @recent_humidity = Sensordata.where("sensor_id = ?", "7").order(time_recorded: :desc).first
+    @recent_flow_rate = Sensordata.where("sensor_id = ?", "8").order(time_recorded: :desc).first
   end
 
   # GET /previous_data
