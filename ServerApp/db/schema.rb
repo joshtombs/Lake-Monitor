@@ -13,6 +13,17 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
+  create_table "Admin", primary_key: "username", force: :cascade do |t|
+    t.string "password", limit: 30
+  end
+
+  create_table "Contact", id: false, force: :cascade do |t|
+    t.string "first_name",   limit: 30, default: "", null: false
+    t.string "last_name",    limit: 30, default: "", null: false
+    t.string "phone_number", limit: 11
+    t.string "email",        limit: 40
+  end
+
   create_table "SensorData", id: false, force: :cascade do |t|
     t.datetime "time_recorded",                        null: false
     t.integer  "sensor_id",     limit: 4,  default: 0, null: false
