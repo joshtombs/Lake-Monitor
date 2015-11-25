@@ -14,7 +14,6 @@ class SensordataController < ApplicationController
   # GET /previous_data
   def previous
     @dates = Array.new
-    @example = "/testroute"
     Sensordata.order(time_recorded: :desc).all.each do |data|
       @dates << Date::MONTHNAMES[Integer(data.time_recorded.strftime("%m"))] + data.time_recorded.strftime(" %Y")
     end
