@@ -13,22 +13,18 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
-  create_table "t_Contact_Info", id: false, force: :cascade do |t|
-    t.string "first_name",   limit: 30, default: "", null: false
-    t.string "last_name",    limit: 30, default: "", null: false
-    t.string "phone_number", limit: 11
-    t.string "email",        limit: 40
+  create_table "SensorData", id: false, force: :cascade do |t|
+    t.datetime "time_recorded",                        null: false
+    t.integer  "sensor_id",     limit: 4,  default: 0, null: false
+    t.float    "value",         limit: 24
   end
 
-  create_table "t_Sensor_Data", primary_key: "time_recorded", force: :cascade do |t|
-    t.float   "wind_speed",     limit: 24
-    t.integer "wind_direction", limit: 4
-    t.float   "rainfall",       limit: 24
-    t.float   "water_level",    limit: 24
-    t.float   "water_temp",     limit: 24
-    t.float   "ambient_temp",   limit: 24
-    t.integer "humidity",       limit: 4
-    t.float   "flow_rate",      limit: 24
+  add_index "sensordata", ["sensor_id"], name: "sensor_id", using: :btree
+
+  create_table "Sensors", primary_key: "sensor_id", force: :cascade do |t|
+    t.string  "type",        limit: 15
+    t.integer "update_rate", limit: 4
   end
 
+  add_foreign_key "SensorData", "Sensors", column: "sensor_id", primary_key: "sensor_id", name: "sensordata_ibfk_1"
 end
