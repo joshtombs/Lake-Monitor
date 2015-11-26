@@ -9,35 +9,35 @@
     </tr>
     <tr>
       <td>Wind Speed:</td>
-      <td><%=@recent_wind_speed.value%></td>
+      <td><%=@most_recent_wind_speed%></td>
     </tr>
     <tr>
       <td>Wind Direction: </td>
-      <td><%=@recent_wind_direction.value%></td>
+      <td><%=@most_recent_wind_direction%></td>
     </tr>
     <tr>
       <td>Rainfall:</td>
-      <td><%=@recent_rainfall%></td>
+      <td><%=@most_recent_rainfall%></td>
     </tr>
     <tr>
       <td>Water Level: </td>
-      <td><%=@recent_water_level%></td>
+      <td><%=@most_recent_water_level%></td>
     </tr>
     <tr>
       <td>Water Temp: </td>
-      <td><%=@recent_water_temp%></td>
+      <td><%=@most_recent_water_temp%></td>
     </tr>
     <tr> 
       <td>Ambient Temp: </td>
-      <td><%=@recent_ambient_temp%></td>
+      <td><%=@most_recent_ambient_temp%></td>
     </tr>
     <tr>
       <td>Humidity: </td>
-      <td><%=@recent_humidity%></td>
+      <td><%=@most_recent_humidity%></td>
     </tr>
     <tr>
       <td>Flow Rate:</td>
-      <td><%=@recent_flow_rate%></td>
+      <td><%=@most_recent_flow_rate%></td>
     </tr>
   </table>
 </p>
@@ -60,7 +60,7 @@
       <tr>
         <td><%= data.time_recorded %></td>
         <td><%= data.sensor_id %></td>
-        <td><%= "Test" %></td>
+        <td><%= data.type.titleize %></td>
         <td><%= data.value %></td>
         
       </tr>
