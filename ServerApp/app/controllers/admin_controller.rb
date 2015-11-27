@@ -1,6 +1,12 @@
 class AdminController < ApplicationController
-
-	def index
+	has_secure_password
+	
+	def login
 		
+	end
+
+	private
+	def admin_params
+		params.require(:admin).permit(:username, :password)
 	end
 end
