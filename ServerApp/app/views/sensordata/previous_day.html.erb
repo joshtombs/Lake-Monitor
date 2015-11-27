@@ -1,27 +1,37 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Hourly Data For <%= @month_name + " " + @day + " " + @year%>:</h1>
 <p>
   <table class="table">
   <thead>
-    <tr>
-      <th>Time Recorded</th>
-      <th>SensorID</th>
-      <th>Type</th>
-      <th>Value</th>
-      <th colspan="3"></th>
-    </tr>
+      <tr>
+        <th>Hour</th>
+        <th>Wind Speed</th>
+        <th>Wind Direction</th>
+        <th>Rainfall</th>
+        <th>Water Level</th>
+        <th>Water Temp</th>
+        <th>Ambient Temp</th>
+        <th>Humidity</th>
+        <th>Flow Rate</th>
+      </tr>
+    </thead>
   </thead>
 
   <tbody>
-    <% @daily_readings.each do |data| %>
-      <tr>
-        <td><%= data.time_recorded %></td>
-        <td><%= data.sensor_id %></td>
-        <td><%= data.type.titleize %></td>
-        <td><%= data.value %></td>
-      </tr>
-    <% end %>
-  </tbody>
+      <% @hours.each do |hour| %>
+        <tr>
+          <td><%= hour + ":00"%></td>
+          <td><%= get_hourly_value(hour, 'wind speed') %></td>
+          <td><%= get_hourly_value(hour, 'wind direction') %></td>
+          <td><%= get_hourly_value(hour, 'rainfall') %></td>
+          <td><%= get_hourly_value(hour, 'water level') %></td>
+          <td><%= get_hourly_value(hour, 'water temp') %></td>
+          <td><%= get_hourly_value(hour, 'ambient temp') %></td>
+          <td><%= get_hourly_value(hour, 'humidity') %></td>
+          <td><%= get_hourly_value(hour, 'flow rate') %></td>
+        </tr>
+      <% end %>
+    </tbody>
 </table>
 </p>
 

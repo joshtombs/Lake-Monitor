@@ -1,32 +1,31 @@
 class SensordataController < ApplicationController
   before_action :set_sensordata, only: [:show, :edit, :update, :destroy]
-  #before_action :get_daily_data, only: [:get_daily_wind_speed, :get_daily_wind_direction, :get_daily_rainfall, :get_daily_water_level, :get_daily_water_temp, :get_daily_ambient_temp, :get_daily_humidity, :get_daily_flow_rate]
-
-  helper_method :get_daily_data, :get_daily_wind_speed, :get_daily_wind_direction, :get_daily_rainfall, :get_daily_water_level, :get_daily_water_temp, :get_daily_ambient_temp, :get_daily_humidity, :get_daily_flow_rate
+  
+  helper_method :get_daily_data, :get_daily_value, :get_hourly_data, :get_hourly_value
   protect_from_forgery
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   # GET /sensordata
   # GET /sensordata.json
   def index
-    @most_recent_wind_speed = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("sensors.type =  'wind speed'").order(time_recorded: :desc).first
+    @most_recent_wind_speed = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("sensors.sensor_type =  'wind speed'").order(time_recorded: :desc).first
     @most_recent_wind_speed = (@most_recent_wind_speed.nil?) ? "N/A" : @most_recent_wind_speed.value
-    @most_recent_wind_direction = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("sensors.type =  'wind direction'").order(time_recorded: :desc).first
+    @most_recent_wind_direction = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("sensors.sensor_type =  'wind direction'").order(time_recorded: :desc).first
     @most_recent_wind_direction = (@most_recent_wind_direction.nil?) ? "N/A" : @most_recent_wind_direction.value
-    @most_recent_rainfall = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("sensors.type =  'rainfall'").order(time_recorded: :desc).first
+    @most_recent_rainfall = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("sensors.sensor_type =  'rainfall'").order(time_recorded: :desc).first
     @most_recent_rainfall = (@most_recent_rainfall.nil?) ? "N/A" : @most_recent_rainfall.value
-    @most_recent_water_level = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("sensors.type =  'water level'").order(time_recorded: :desc).first
+    @most_recent_water_level = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("sensors.sensor_type =  'water level'").order(time_recorded: :desc).first
     @most_recent_water_level = (@most_recent_water_level.nil?) ? "N/A" : @most_recent_water_level.value
-    @most_recent_water_temp = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("sensors.type =  'water temp'").order(time_recorded: :desc).first
+    @most_recent_water_temp = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("sensors.sensor_type =  'water temp'").order(time_recorded: :desc).first
     @most_recent_water_temp = (@most_recent_water_temp.nil?) ? "N/A" : @most_recent_water_temp.value
-    @most_recent_ambient_temp = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("sensors.type =  'ambient temp'").order(time_recorded: :desc).first
+    @most_recent_ambient_temp = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("sensors.sensor_type =  'ambient temp'").order(time_recorded: :desc).first
     @most_recent_ambient_temp = (@most_recent_ambient_temp.nil?) ? "N/A" : @most_recent_ambient_temp.value
-    @most_recent_humidity = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("sensors.type =  'humidity'").order(time_recorded: :desc).first
+    @most_recent_humidity = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("sensors.sensor_type =  'humidity'").order(time_recorded: :desc).first
     @most_recent_humidity = (@most_recent_humidity.nil?) ? "N/A" : @most_recent_humidity.value
-    @most_recent_flow_rate = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("sensors.type =  'flow rate'").order(time_recorded: :desc).first
+    @most_recent_flow_rate = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("sensors.sensor_type =  'flow rate'").order(time_recorded: :desc).first
     @most_recent_flow_rate = (@most_recent_flow_rate.nil?) ? "N/A" : @most_recent_flow_rate.value
 
-    @sensordata = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').order(time_recorded: :desc).first(10)
+    @sensordata = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').order(time_recorded: :desc).first(10)
   end
 
   # GET /previous_data
@@ -61,64 +60,46 @@ class SensordataController < ApplicationController
 
   def get_daily_data(date)
     d_array = [date.strftime("%m"), date.strftime("%d"), date.strftime("%Y")]
-    @daily_data = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("MONTH(time_recorded) = ? and DAY(time_recorded) = ? and YEAR(time_recorded) = ?", d_array[0], d_array[1], d_array[2]).order(time_recorded: :desc)
+    @daily_data = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("MONTH(time_recorded) = ? and DAY(time_recorded) = ? and YEAR(time_recorded) = ?", d_array[0], d_array[1], d_array[2]).order(time_recorded: :desc)
   end
 
-  def get_daily_wind_speed(date)
+  def get_daily_value(date, sensor_type)
     get_daily_data(date)
-    @daily_data.where("sensors.type =  'wind speed'").each do |r|
-      puts r.value
-    end
-    @daily_wind_speed = @daily_data.where("sensors.type =  'wind speed'").first
-    (@daily_wind_speed.nil?) ? "N/A" : @daily_wind_speed.value
+    @daily_value = @daily_data.where("sensors.sensor_type =  ?", sensor_type).first
+    (@daily_value.nil?) ? "N/A" : @daily_value.value
   end
 
-  def get_daily_wind_direction(date)
-    get_daily_data(date)
-    @daily_wind_direction = @daily_data.where("sensors.type =  'wind direction'").first
-    (@daily_wind_direction.nil?) ? "N/A" : @daily_wind_direction.value
+  def get_hourly_data(hour)
+    d_array = [Date::MONTHNAMES.index(params[:month]), params[:day], params[:year]]
+    @hourly_data = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("MONTH(time_recorded) = ? and DAY(time_recorded) = ? and YEAR(time_recorded) = ? and TIME(time_recorded) BETWEEN ? AND ?", d_array[0], d_array[1], d_array[2], hour, (Integer(hour) + 1).to_s).order(time_recorded: :desc)
   end
 
-  def get_daily_rainfall(date)
-    get_daily_data(date)
-    @daily_rainfall = @daily_data.where("sensors.type =  'rainfall'").first
-    (@daily_rainfall.nil?) ? "N/A" : @daily_rainfall.value
-  end
-
-  def get_daily_water_level(date)
-    get_daily_data(date)
-    @daily_water_level = @daily_data.where("sensors.type =  'water level'").first
-    (@daily_water_level.nil?) ? "N/A" : @daily_water_level.value
-  end
-
-  def get_daily_water_temp(date)
-    get_daily_data(date)
-    @daily_water_temp = @daily_data.where("sensors.type =  'water temp'").first
-    (@daily_water_temp.nil?) ? "N/A" : @daily_water_temp.value
-  end
-
-  def get_daily_ambient_temp(date)
-    get_daily_data(date)
-    @daily_ambient_temp = @daily_data.where("sensors.type =  'ambient temp'").first
-    (@daily_ambient_temp.nil?) ? "N/A" : @daily_ambient_temp.value
-  end
-
-  def get_daily_humidity(date)
-    get_daily_data(date)
-    @daily_humidity = @daily_data.where("sensors.type =  'humidity'").first
-    (@daily_humidity.nil?) ? "N/A" : @daily_humidity.value
-  end
-
-  def get_daily_flow_rate(date)
-    get_daily_data(date)
-    @daily_flow_rate = @daily_data.where("sensors.type =  'flow rate'").first
-    (@daily_flow_rate.nil?) ? "N/A" : @daily_flow_rate.value
+  def get_hourly_value(hour, sensor_type)
+    get_hourly_data(hour)
+    @hourly_value = @hourly_data.where("sensors.sensor_type =  ?", sensor_type).first
+    (@hourly_value.nil?) ? "N/A" : @hourly_value.value
   end
 
   #Get /show_previous/1
   def previous_day
     d_array = [Date::MONTHNAMES.index(params[:month]), params[:day], params[:year]]
-    @daily_readings = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.type as type').where("MONTH(time_recorded) = ? and DAY(time_recorded) = ? and YEAR(time_recorded) = ?", d_array[0].to_s, d_array[1], d_array[2]).order(time_recorded: :desc)
+    @month_name = params[:month]
+    @day = params[:day].to_s
+    @year = params[:year].to_s
+
+    @hours = Array.new
+
+    all_hours = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').where("MONTH(time_recorded) = ? and DAY(time_recorded) = ? and YEAR(time_recorded) = ?", d_array[0].to_s, d_array[1], d_array[2]).order(time_recorded: :desc).select("time_recorded")
+    
+    all_hours.each do |r|
+      #Filter out dates so that only one entry in dates per calender day
+      substr = r.time_recorded.strftime("%H")
+      unless @hours.any? { |hour| hour.to_s.include?(substr) }
+        @hours << r.time_recorded.strftime("%H")
+      end
+    end
+    
+    @hours = @hours.uniq
 
     @previous_link = "/previous_data/" + params[:month] + "/" + params[:year]
   end

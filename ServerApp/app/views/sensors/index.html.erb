@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<h1>Sensors:</h1>
+
+<p>
+<table class="table">
+<thead>
+	<tr>
+		<th>Sensor ID</th>
+		<th>Type</th>
+		<th>Update Rate</th>
+	</tr>
+</thead>
+<tbody>
+	<% @sensors.each do |sensor| %>
+	<tr>
+		<td><%= sensor.sensor_id %></td>
+		<td><%= sensor.sensor_type.titleize %></td>
+		<td><%= sensor.update_rate %></td>
+		<td><a href="<%= edit_link(sensor.sensor_id) %>">Edit</a></td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+</p>

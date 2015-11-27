@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "sensordata", ["sensor_id"], name: "sensor_id", using: :btree
 
   create_table "Sensors", primary_key: "sensor_id", force: :cascade do |t|
-    t.string  "type",        limit: 15
+    t.string  "sensor_type", limit: 15
     t.integer "update_rate", limit: 4
   end
 

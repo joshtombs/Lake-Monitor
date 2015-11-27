@@ -20,14 +20,14 @@
       <% @dates.each do |date| %>
         <tr>
           <td><a href="/show_previous/<%= @month_name + '/' + @year.to_s + '/' + date.strftime("%d") %>"><%= date.strftime("%m/%d/%y") %></a></td>
-          <td><%= get_daily_wind_speed(date) %></td>
-          <td><%= get_daily_wind_direction(date) %></td>
-          <td><%= get_daily_rainfall(date) %></td>
-          <td><%= get_daily_water_level(date) %></td>
-          <td><%= get_daily_water_temp(date) %></td>
-          <td><%= get_daily_ambient_temp(date) %></td>
-          <td><%= get_daily_humidity(date) %></td>
-          <td><%= get_daily_flow_rate(date) %></td>
+          <td><%= get_daily_value(date, 'wind speed') %></td>
+          <td><%= get_daily_value(date, 'wind direction') %></td>
+          <td><%= get_daily_value(date, 'rainfall') %></td>
+          <td><%= get_daily_value(date, 'water level') %></td>
+          <td><%= get_daily_value(date, 'water temp') %></td>
+          <td><%= get_daily_value(date, 'ambient temp') %></td>
+          <td><%= get_daily_value(date, 'humidity') %></td>
+          <td><%= get_daily_value(date, 'flow rate') %></td>
         </tr>
       <% end %>
   	</tbody>

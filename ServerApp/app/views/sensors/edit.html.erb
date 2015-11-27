@@ -1,0 +1,21 @@
+<h1> Editing Sensor</h1>
+<p>
+	<form role="form">
+		<div class="form-group">
+			<label for="sensor_id">Sensor ID:</label>
+			<br/><%= @sensor.sensor_id %>
+		</div>
+		<div class="form-group field">
+			<label for="update_rate">Update Rate:</label>
+			<input type="text" class="form-control" id="update_rate">
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+</p>
+
+<script type="text/javascript">
+document.getElementById('update_rate').value = <%= @sensor.update_rate%>
+</script>
+<p>
+	<a href="/sensor_information">Back</a>
+</p>
