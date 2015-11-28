@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   post 'add_sensor' => 'sensors#create'
 
   get 'contacts' => 'contactinfo#index'
-  get 'contact_admin' => 'contactinfo#contact_admin'
+  
+  get 'contact_admin' => 'messages#new'
+  post 'contact_admin' => 'messages#create'
 
   get 'admin_login' => 'sessions#new'
   post 'admin_login' => 'sessions#create'

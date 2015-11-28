@@ -22,5 +22,20 @@ module ServerApp
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    #conf.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+        address: "smtp.gmail.com",
+        port: 587,
+        domain: "gmail.com",
+        user_name: "noreplylmsviall",
+        password: "LMSpassword",
+        authentication: :plain,
+        enable_starttls_auto: true
+    }
+
+    config.action_mailer.default_url_options = {
+        host: "localhost:3000"
+    }
   end
 end
