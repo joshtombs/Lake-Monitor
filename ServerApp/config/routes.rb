@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   get 'sensor/:id' => 'sensors#get_update_rate'
 
+  get "previous_posts" => "sensordata#previous_posts"
+  post "update_posts" => "sensordata#update_posts"
+
   root :to => 'sensordata#index'
   match "*path", to: "sensordata#index", via: :all
 end
