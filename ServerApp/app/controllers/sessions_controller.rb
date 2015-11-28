@@ -6,9 +6,6 @@ class SessionsController < ApplicationController
   def create
     #admin = Admins.where(:username => params[:admin][:username].downcase).first
     admin = Admins.find_by_username(params[:admin][:username])
-	puts "\n\n\n\n\n"
-    puts BCrypt::Password.create(params[:admin][:password_digest])
-    puts "\n\n\n\n\n"
     if admin && admin.authenticate(params[:admin][:password_digest])
       session[:admin_id] = admin.id
       redirect_to '/sensordata'
