@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'sensor_information' => 'sensors#index'
   get 'edit_sensor/:id' => 'sensors#edit'
   
-  put 'edit_sensor/:id' => 'sensors#update'
+  post 'edit_sensor/:id' => 'sensors#update'
 
   get 'add_sensor' => 'sensors#add_sensor'
   post 'add_sensor' => 'sensors#create'

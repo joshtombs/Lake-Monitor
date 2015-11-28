@@ -18,9 +18,11 @@ class SensorsController < ApplicationController
 	end
 
 	def edit
+		@form_url = "/edit_sensor/" + params[:id]
 	end
 
 	def update
+		puts params
 		respond_to do |format|
 		  if @sensor.update(sensor_params)
 		    format.html { redirect_to '/sensor_information', notice: 'sensor was successfully updated.' }
