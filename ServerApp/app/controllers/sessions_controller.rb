@@ -4,12 +4,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-    admin = Admin.find_by_username(params[:username])
-    if admin && admin.authenticate(params[:password])
+    #admin = Admins.where(:username => params[:admin][:username].downcase).first
+    admin = Admins.find_by_username(params[:admin][:username])
+	puts "\n\n\n\n\n"
+    puts BCrypt::Password.create(params[:admin][:password_digest])
+    puts "\n\n\n\n\n"
+    if admin && admin.authenticate(params[:admin][:password_digest])
       session[:admin_id] = admin.id
       redirect_to '/sensordata'
+      flash[:notice] ="Login successful!"
     else
       redirect_to '/admin_login'
+      flash[:notice] ="Login unsuccessful, please try again."
     end
   end
 

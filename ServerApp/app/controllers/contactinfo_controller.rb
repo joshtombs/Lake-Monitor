@@ -1,6 +1,6 @@
 class ContactinfoController < ApplicationController
-	before_filter :authorize, :only [:index]
-	
+	before_filter :authorize, :only => [:index]
+
 	def index
 		@contacts = Contactinfo.all
 	end

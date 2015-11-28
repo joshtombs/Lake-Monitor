@@ -1,5 +1,4 @@
 class AdminController < ApplicationController
-	has_secure_password
 	
 	def login
 		

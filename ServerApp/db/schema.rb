@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 0) do
 
   create_table "Admin", primary_key: "username", force: :cascade do |t|
-    t.string "password", limit: 30
+    t.string "password_digest", limit: 60
   end
 
   create_table "Contact", id: false, force: :cascade do |t|
