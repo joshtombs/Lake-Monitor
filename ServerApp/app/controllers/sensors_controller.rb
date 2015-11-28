@@ -1,9 +1,16 @@
 class SensorsController < ApplicationController
-	before_action :set_sensor, only: [:edit, :update, :destroy]
+	before_action :set_sensor, only: [:edit, :update, :destroy, :get_update_rate]
 	helper_method :edit_link
 
 	def index
 		@sensors = Sensors.all
+	end
+
+	def get_update_rate
+		render json: {
+				sensor_id: params[:id],
+				update_rate: @sensor.update_rate
+			}.to_json
 	end
 
 	def edit_link(id)

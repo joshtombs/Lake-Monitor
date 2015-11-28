@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   post 'admin_login' => 'sessions#create'
   get 'admin_logout' => 'sessions#destroy'
 
+  get 'sensor/:id' => 'sensors#get_update_rate'
+
   root :to => 'sensordata#index'
   match "*path", to: "sensordata#index", via: :all
 end

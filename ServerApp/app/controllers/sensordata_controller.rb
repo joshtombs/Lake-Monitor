@@ -173,6 +173,6 @@ class SensordataController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sensordata_params
-      params.permit(:time_recorded, :wind_speed, :wind_direction, :rainfall, :water_level, :water_temp, :ambient_temp, :humidity, :flow_rate)
+      params.permit(:time_recorded, :sensor_id, :value)
     end
 end
