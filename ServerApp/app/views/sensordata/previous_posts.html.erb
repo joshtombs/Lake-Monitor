@@ -2,7 +2,9 @@
 
 <h1>Posts During Range:</h1>
 <%= form_tag("/update_posts", method: "post") do %>
+	<%= label_tag(:start_date, "Start Date:") %>
 	<%= select_date Date.today - 10, class: "form-control", prefix: :start_date%>
+	<%= label_tag(:end_date, "End Date:") %>
 	<%= select_date Date.today, class: "form-control",prefix: :end_date%>
 	<%= submit_tag("Submit") %>
 <% end %>
