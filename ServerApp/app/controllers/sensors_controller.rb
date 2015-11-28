@@ -1,6 +1,7 @@
 class SensorsController < ApplicationController
 	before_action :set_sensor, only: [:edit, :update, :destroy, :get_update_rate]
 	helper_method :edit_link
+	before_filter :authorize, :only => [:edit]
 
 	def index
 		@sensors = Sensors.all
