@@ -10,9 +10,6 @@ Rails.application.routes.draw do
   
   post 'edit_sensor/:id' => 'sensors#update'
 
-  get 'add_sensor' => 'sensors#add_sensor'
-  post 'add_sensor' => 'sensors#create'
-
   get 'contacts' => 'contactinfo#index'
   
   get 'contact_admin' => 'messages#new'

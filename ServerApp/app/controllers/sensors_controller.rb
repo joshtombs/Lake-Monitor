@@ -34,31 +34,12 @@ class SensorsController < ApplicationController
 		end
 	end
 
-	def add_sensor
-		@sensor = Sensors.new
-	end
-
-	def create
-		@sensor = Sensors.new(sensor_params)
-
-	    respond_to do |format|
-	      if @sensor.save
-	        format.html { redirect_to @sensor, notice: 'sensor was successfully created.' }
-	        format.json { render :show, status: :created, location: @sensor }
-	      else
-	        format.html { render :new }
-	        #format.json { render json: @sensor.errors, status: :unprocessable_entity }
-	        render json: { errors: @sensor.errors }, status: :unprocessable_entity
-	      end
-	    end
-	end
-
 	private
 		def set_sensor
 		  @sensor = Sensors.find(params[:id])
 		end
 
 		def sensor_params
-	      params.permit(:sensor_id, :sensor_type, :update_rate)
+	      params.permit(:sensor_id, :sensor_type, :update_rate, :location)
 	    end
 end

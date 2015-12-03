@@ -12,6 +12,8 @@
 		<br>
 		<%= label_tag(:update_rate, "Update Rate") %>
 		<%= text_field_tag(:update_rate, nil,class:"form-control")%>
+		<%= label_tag(:location, "Location") %>
+		<%= text_field_tag(:location, nil,class:"form-control")%>
 		<br>
 		<%= submit_tag("Submit", class:"form-control") %>
 	<% end %>
@@ -19,6 +21,7 @@
 
 <script type="text/javascript">
 document.getElementById('update_rate').value = <%= @sensor.update_rate%>
+document.getElementById('location').value = "<%= @sensor.location%>"
 </script>
 <p>
 	<a href="/sensor_information">Back</a>
