@@ -111,7 +111,7 @@ class SensordataController < ApplicationController
   def update_posts
     @starting_date = Date.parse(params[:start_date][:year] + "-" + params[:start_date][:month] + "-" + params[:start_date][:day])
     @ending_date = Date.parse(params[:end_date][:year] + "-" + params[:end_date][:month] + "-" + params[:end_date][:day])
-    @range_data = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').where("DATE(time_recorded) >= ? and DATE(time_recorded) <= ?", @starting_date, @ending_date).select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').order(time_recorded: :desc).first(10)
+    @range_data = Sensordata.joins('LEFT OUTER JOIN sensors ON sensordata.sensor_id = sensors.sensor_id').where("DATE(time_recorded) >= ? and DATE(time_recorded) <= ?", @starting_date, @ending_date).select('sensordata.time_recorded, sensordata.sensor_id, sensordata.value, sensors.sensor_type as sensor_type').order(time_recorded: :desc)
   end
 
   # GET /sensordata/1
