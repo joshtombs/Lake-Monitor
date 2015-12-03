@@ -1,3 +1,3 @@
 class Contactinfo < ActiveRecord::Base
-	self.table_name = "Contact"
+	self.table_name = "contact"
 end

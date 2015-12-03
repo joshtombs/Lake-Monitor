@@ -1,3 +1,3 @@
 class Sensordata < ActiveRecord::Base
-	self.table_name = "SensorData"
+	self.table_name = "sensordata"
 end
