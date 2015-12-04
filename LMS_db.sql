@@ -53,17 +53,36 @@ CREATE TABLE admin(
     password_digest	VARCHAR(60),
 	PRIMARY KEY (username));
 
+###Trigger for versions of MySQL later than 5.5
+# DELIMITER $$
+# CREATE TRIGGER limit_admin 
+# BEFORE INSERT
+# ON admin
+# FOR EACH ROW
+# BEGIN
+# 	SELECT COUNT(*) INTO @cnt FROM Admin;
+# 	IF @cnt > 0 THEN
+# 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "You can not have more than one admin.";
+# 	END IF;
+# END
+# $$
+# DELIMITER ;
+
+###Trigger for versions of MySQL earlier than 5.5
 DELIMITER $$
 CREATE TRIGGER limit_admin 
 BEFORE INSERT
 ON admin
 FOR EACH ROW
 BEGIN
+	DECLARE dummy INT;
 	SELECT COUNT(*) INTO @cnt FROM Admin;
 	IF @cnt > 0 THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "You can not have more than one admin.";
+		SELECT 'You can not have more than one admin.'
+		INTO dummy
+		FROM admin;
 	END IF;
-END
+END;
 $$
 DELIMITER ;
 
