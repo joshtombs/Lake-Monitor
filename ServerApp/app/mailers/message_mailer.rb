@@ -5,8 +5,11 @@ class MessageMailer < ActionMailer::Base
 
   def new_message(message)
     @message = message
-    
     mail subject: "Message from #{message.name}"
   end
 
+  def send_warning(message, recipient)
+  	@message = message
+	mail(to: recipient.email, subject: "Warning! Potentially Dangerous Lake Conditions").deliver
+  end
 end

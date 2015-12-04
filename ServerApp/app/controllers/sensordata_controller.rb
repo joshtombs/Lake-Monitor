@@ -135,12 +135,32 @@ class SensordataController < ApplicationController
 
     respond_to do |format|
       if @sensordata.save
-        format.html { redirect_to @sensordata, notice: 'sensordata was successfully created.' }
-        format.json { render :show, status: :created, location: @sensordata }
+        format.html { redirect_to :root }
+        format.json {redirect_to :root }
+        check_unsafe_conditions(@sensordata)
       else
         format.html { render :new }
         #format.json { render json: @sensordata.errors, status: :unprocessable_entity }
         render json: { errors: @sensordata.errors }, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def check_unsafe_conditions(data)
+    s_type = Sensors.select("sensor_type").where("sensor_id = ?", data.sensor_id).first
+    s_type = (s_type.nil?) ? nil : s_type.sensor_type
+    case s_type
+    when "wind speed"
+      if(data.value > 20 )
+        send_warning_email("Wind speed above 20 mph") 
+      end
+    when "water level"
+      if(data.value > 12 )
+        send_warning_email("Water level above 12 inches") 
+      end
+    when "wind direction"
+      if(data.value > 1 && data.value <  7)
+        send_warning_email("Wind direction between North NorthEast and South SouthEast") 
       end
     end
   end

@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
   def authorize
     redirect_to '/admin_login' unless current_admin
   end
+
+  def send_warning_email(conditions)
+    recipients = Contactinfo.all
+    recipients.each do |recipient|
+      MessageMailer.send_warning(conditions, recipient).deliver_now
+    end
+    flash[:alert] = "An unsafe condition was just posted!"
+  end
 end

@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     
     if @message.valid?
-      MessageMailer.new_message(@message).deliver
+      MessageMailer.new_message(@message).deliver_now
       redirect_to :root, notice: "Your messages has been sent."
     else
       flash[:alert] = "An error occurred while delivering this message."
