@@ -10,6 +10,6 @@ class MessageMailer < ActionMailer::Base
 
   def send_warning(message, recipient)
   	@message = message
-	mail(to: recipient.email, subject: "Warning! Potentially Dangerous Lake Conditions").deliver
+	mail(to: recipient.email, from: "LMS Notifications <noreplyLMSviall@gmail.com>", subject: "Warning! Potentially Dangerous Lake Conditions").deliver
   end
 end
