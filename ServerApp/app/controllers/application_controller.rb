@@ -13,10 +13,12 @@ class ApplicationController < ActionController::Base
   end
 
   def send_warning_email(conditions)
-    recipients = Contactinfo.all
-    recipients.each do |recipient|
-      MessageMailer.send_warning(conditions, recipient).deliver_now
+    contacts = Contactinfo.all
+    recipients = Array.new
+    contacts.each do |c|
+      recipients << c.email
     end
+    MessageMailer.send_warning(conditions, recipients).deliver_now
     flash[:alert] = "An unsafe condition was just posted!"
   end
 end
