@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Most Recent Data:</h1>
+<p>
+  <table class="table">
+    <tr>
+      <td>Time Recorded: </td>
+      <td><%=@sensordata.first.time_recorded%></td>
+    </tr>
+    <tr>
+      <td>Wind Speed:</td>
+      <td><%=@most_recent_wind_speed%></td>
+    </tr>
+    <tr>
+      <td>Wind Direction: </td>
+      <td><%=@most_recent_wind_direction%></td>
+    </tr>
+    <tr>
+      <td>Rainfall:</td>
+      <td><%=@most_recent_rainfall%></td>
+    </tr>
+    <tr>
+      <td>Water Level: </td>
+      <td><%=@most_recent_water_level%></td>
+    </tr>
+    <tr>
+      <td>Water Temp: </td>
+      <td><%=@most_recent_water_temp%></td>
+    </tr>
+    <tr> 
+      <td>Ambient Temp: </td>
+      <td><%=@most_recent_ambient_temp%></td>
+    </tr>
+    <tr>
+      <td>Humidity: </td>
+      <td><%=@most_recent_humidity%></td>
+    </tr>
+    <tr>
+      <td>Flow Rate:</td>
+      <td><%=@most_recent_flow_rate%></td>
+    </tr>
+  </table>
+</p>
+
+<h1>Listing Last 10 Sensor Readings:</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Time Recorded</th>
+      <th>SensorID</th>
+      <th>Sensor Type</th>
+      <th>Value</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sensordata.each do |data| %>
+      <tr>
+        <td><%= data.time_recorded %></td>
+        <td><%= data.sensor_id %></td>
+        <td><%= data.sensor_type.titleize %></td>
+        <td><%= data.value %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>

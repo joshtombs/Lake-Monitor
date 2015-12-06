@@ -1,56 +1,29 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  resources :sensordata  
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  get 'previous_data' => 'sensordata#previous'
+  get 'previous_data/:month/:year' => 'sensordata#previous_month'
+  get 'show_previous/:month/:year/:day' => 'sensordata#previous_day'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  get 'sensor_information' => 'sensors#index'
+  get 'edit_sensor/:id' => 'sensors#edit'
+  
+  post 'edit_sensor/:id' => 'sensors#update'
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  get 'contacts' => 'contactinfo#index'
+  
+  get 'contact_admin' => 'messages#new'
+  post 'contact_admin' => 'messages#create'
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  get 'admin_login' => 'sessions#new'
+  post 'admin_login' => 'sessions#create'
+  get 'admin_logout' => 'sessions#destroy'
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  get 'sensor/:id' => 'sensors#get_update_rate'
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  get "previous_posts" => "sensordata#previous_posts"
+  post "update_posts" => "sensordata#update_posts"
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  root :to => 'sensordata#index'
+  match "*path", to: "sensordata#index", via: :all
 end

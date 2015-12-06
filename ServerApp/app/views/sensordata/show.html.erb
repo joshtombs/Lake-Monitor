@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <table class="table">
+    <tr>
+      <td>Time Recorded: </td>
+      <td><%=@sensordata.time_recorded%></td>
+    </tr>
+    <tr>
+      <td>Wind Speed:</td>
+      <td><%=@sensordata.wind_speed%></td>
+    </tr>
+    <tr>
+      <td>Wind Direction: </td>
+      <td><%=@sensordata.wind_direction%></td>
+    </tr>
+    <tr>
+      <td>Rainfall:</td>
+      <td><%=@sensordata.rainfall%></td>
+    </tr>
+    <tr>
+      <td>Water Level: </td>
+      <td><%=@sensordata.water_level%></td>
+    </tr>
+    <tr>
+      <td>Water Temp: </td>
+      <td><%=@sensordata.water_temp%></td>
+    </tr>
+    <tr> 
+      <td>Ambient Temp: </td>
+      <td><%=@sensordata.ambient_temp%></td>
+    </tr>
+    <tr>
+      <td>Humidity: </td>
+      <td><%=@sensordata.humidity%></td>
+    </tr>
+    <tr>
+      <td>Flow Rate:</td>
+      <td><%=@sensordata.flow_rate%></td>
+    </tr>
+  </table>
+</p>
+
+<%= link_to 'Back', sensordata_path %>

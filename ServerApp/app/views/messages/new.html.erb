@@ -1,0 +1,22 @@
+<h1>Send Message To Admin</h1>
+<%= form_for @message, url: contact_admin_path, class: "form-group" do |message_form| %>
+  <fieldset>
+    <div class="field">
+      <%= message_form.text_field :name, placeholder: "Name", class: "form-control" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= message_form.email_field :email, placeholder: "Email", class: "form-control" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= message_form.text_area :content, placeholder: "Message", class: "form-control" %>
+    </div>
+  </fieldset>
+  
+  <fieldset>
+    <div class="field">
+      <%= message_form.submit "Send" %>
+    </div>
+  </fieldset>
+<% end %>

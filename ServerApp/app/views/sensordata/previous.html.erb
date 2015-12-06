@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Previous Data:</h1>
+<p>
+  <table class="table">
+      <% @dates.each do |date| %>
+        <tr>
+          <td>
+            <a href="<%= "/previous_data/" + date.partition(" ").first + "/" + date.partition(" ").last%>"><%= date %></a>
+          </td>
+        </tr>
+      <% end %>
+  </table>
+</p>
